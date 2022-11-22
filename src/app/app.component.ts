@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { User } from './models/user';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'insurance';
+  users: User[]=[];
+
+  constructor(private userService: UserService){}
+
+  ngOnInit(){
+    this.userService
+      .getUsers()
+      .subscribe((result: User[])=>(this.users=result));
+
+  }
+
 }
